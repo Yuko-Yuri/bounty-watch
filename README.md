@@ -10,7 +10,7 @@ Daily monitor for public bug bounty programs on **HackerOne, Bugcrowd, YesWeHack
   - frontend deploy and stack changes: new or removed JS bundles, `Server`/`X-Powered-By` changes, generator and title changes, from one GET per in-scope URL
 - **Alerts**: a GitHub Issue opens in this repo, which makes GitHub email you. Alerts cover new programs, programs resumed after 3+ days, and every change on your watchlist. Pause all alert email from **Settings → Email alerts** on the dashboard (or set `alerts_paused` in `docs/data/settings.json`); scans and data keep running.
 - **Daily scope digest**: one email a day (after 06:00 UTC) listing every asset added to or removed from any **bug bounty** program (VDPs excluded), with its own dashboard page at `scope.html`.
-- **Dashboard**: https://abdulsalam-create.github.io/bounty-watch/
+- **Dashboard**: https://bountywatch.hackmestepbro.com/
 
 Program data comes from [arkadiyt/bounty-targets-data](https://github.com/arkadiyt/bounty-targets-data), which refreshes about every 30 minutes. No logins or scraping.
 

@@ -21,7 +21,7 @@ PROGS, CHANGES, ALERT = "docs/data/programs.json", "docs/data/changes.json", "al
 EVID = "docs/data/evidence.json"  # snapshots of successful 403/401 bypasses (preserved through re-locks)
 DIGEST_STATE, DIGEST, DIGEST_HOUR = "data/digest.json", "digest.md", 6  # daily scope digest after 06:00 UTC
 FEED_DAYS, MAX_URLS, TIMEOUT = 90, 25, 10
-UA = {"User-Agent": "Mozilla/5.0 (bounty-watch; +https://github.com/abdulsalam-create/bounty-watch)"}
+UA = {"User-Agent": "Mozilla/5.0 (bounty-watch; +https://github.com/amirmomeni177/bounty-watch)"}
 NOW = datetime.now(timezone.utc)
 TODAY = NOW.strftime("%Y-%m-%d")
 CTX = ssl.create_default_context()
@@ -1027,7 +1027,7 @@ def write_digest(events):
                 by.setdefault(e["k"], []).append(e)
             md = [f"# Daily scope digest {TODAY}\n",
                   f"{len(pend)} scope change(s) across {len(by)} bug bounty program(s) since the last digest.\n",
-                  "Dashboard: https://abdulsalam-create.github.io/bounty-watch/scope.html\n"]
+                  "Dashboard: https://bountywatch.hackmestepbro.com/scope.html\n"]
             for k, evs in sorted(by.items(), key=lambda kv: -len(kv[1])):
                 e0 = evs[0]
                 md.append(f"### {e0['n']} (`{k}`)\n{e0['u']}")
@@ -1041,7 +1041,7 @@ def write_digest(events):
             if len(body) > 60000:
                 body = body[:60000] + "\n\n…truncated, see the dashboard for the full list."
             with open(DIGEST, "w", encoding="utf-8") as f:
-                f.write(body + "\n\ncc @abdulsalam-create")
+                f.write(body + "\n\ncc @amirmomeni177")
             with open("digest_title.txt", "w", encoding="utf-8") as f:
                 f.write(f"Scope digest {TODAY}: {len(pend)} changes across {len(by)} bounty programs")
             print(f"[!] digest written: {len(pend)} changes")
@@ -1067,7 +1067,7 @@ def write_inscope_digest(events):
                 by.setdefault(e["k"], []).append(e)
             md = [f"# New in-scope assets {TODAY}\n",
                   f"{len(by)} bug bounty program(s) added new in-scope targets since the last check.\n",
-                  "Dashboard: https://abdulsalam-create.github.io/bounty-watch/#inscope\n"]
+                  "Dashboard: https://bountywatch.hackmestepbro.com/#inscope\n"]
             for k, evs in sorted(by.items(), key=lambda kv: -sum(len(e.get("a") or []) for e in kv[1])):
                 e0 = evs[0]
                 assets = sorted({a for e in evs for a in (e.get("a") or [])})
@@ -1079,7 +1079,7 @@ def write_inscope_digest(events):
             if len(body) > 60000:
                 body = body[:60000] + "\n\n…truncated, see the dashboard."
             with open(INSCOPE, "w", encoding="utf-8") as f:
-                f.write(body + "\n\ncc @abdulsalam-create")
+                f.write(body + "\n\ncc @amirmomeni177")
             with open("inscope_title.txt", "w", encoding="utf-8") as f:
                 f.write(f"New in-scope {TODAY}: {len(by)} program(s) added targets")
             print(f"[!] in-scope digest written: {len(by)} programs")
@@ -1133,7 +1133,7 @@ def write_alert(events, watch, first):
         md += [f"## Resumed after a pause of 3+ days ({len(back)})"] + [line(e) for e in back] + [""]
     if other_scope:
         md.append(f"_{other_scope} scope changes on non-watchlist programs; see the dashboard._\n")
-    md.append("Dashboard: https://abdulsalam-create.github.io/bounty-watch/\n\ncc @abdulsalam-create")
+    md.append("Dashboard: https://bountywatch.hackmestepbro.com/\n\ncc @amirmomeni177")
     with open(ALERT, "w", encoding="utf-8") as f:
         f.write("\n".join(md))
     with open("alert_title.txt", "w", encoding="utf-8") as f:
